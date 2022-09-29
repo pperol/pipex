@@ -1,4 +1,4 @@
-#pipex
+# Pipex
 ***
 The aim of this project is to reproduce the UNIX mechanism `pipe`.
 
