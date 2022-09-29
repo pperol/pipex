@@ -1,5 +1,4 @@
 # Pipex
-**
 The aim of this project is to reproduce the UNIX mechanism `pipe`.
 
 ### Discription of mandatory part
