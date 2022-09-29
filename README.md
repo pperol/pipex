@@ -1,6 +1,3 @@
-# pipex
-***
-![eng](img/eng.png) [![ru](img/ru.png)](README.ru.md)
 # `pipex`
 ***
 The aim of this project is to reproduce the UNIX mechanism `pipe`.
@@ -16,7 +13,7 @@ $> ./pipex file1 cmd1 cmd2 file2
 ```
 All errors like: wrong commands,  permission to files and etc, need be handle.
 ### Discription of bonus part
-Program need handle multiple pipes
+Pipex shoud handle multiple pipes
 ```bash
 $> < file1 cmd1 | cmd2 | cmd3 | ... | cmdn > file2
 
