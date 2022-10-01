@@ -1,5 +1,6 @@
 # Pipex
 The aim of this project is to reproduce the UNIX tool `pipe` ('|').
+
 A pipe is a form of redirection (transfer of standard output to some other destination) that is used in Linux and other Unix-like operating systems to send the output of one command/program/process to another command/program/process for further processing. 
 The Unix/Linux systems allow stdout of a command to be connected to stdin of another command. 
 You can make it do so by using the pipe character '|'. 
