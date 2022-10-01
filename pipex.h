@@ -6,22 +6,42 @@
 /*   By: pperol <pperol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:22:28 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/01 11:56:35 by pperol           ###   ########.fr       */
+/*   Updated: 2022/10/01 17:10:04 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdlib.h>
+/* write, read, close, access, pipe, dup, execve */
 # include <unistd.h>
+# include <sys/uio.h>
+
+/* malloc, free, exit */
+# include <stdlib.h>
+
+/* fork, pid_t */
+# include <sys/types.h>
+
+/* open, unlink */
+# include <fcntl.h>
+
+/* waitpid, wait */
+# include <sys/wait.h>
+
+/* strerror */
+# include <string.h>
+
+/* perror*/
+# include <stdio.h>
 
 /*
 ** DATAS ****************
 */
 typedef struct s_pipe
 {
-
+	pid_t	pid1;
+	pid_t	pid2;
 }	t_pipe;	
 
 /*
