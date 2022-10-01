@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pperol <pperol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/27 17:57:38 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/01 11:52:35 by pperol           ###   ########.fr       */
+/*   Created: 2021/11/26 09:20:24 by pperol            #+#    #+#             */
+/*   Updated: 2022/10/01 11:11:21 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	i;
+	char	*dst;
 
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] == s2[i])
-	{
-		if (s1[i] == '\0' || i == n - 1)
-			return (0);
-		i++;
-	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	dst = malloc(size * nmemb);
+	if (!dst)
+		return (NULL);
+	ft_bzero(dst, nmemb * size);
+	return (dst);
 }

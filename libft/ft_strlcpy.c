@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/27 17:57:38 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/01 11:52:35 by pperol           ###   ########.fr       */
+/*   Created: 2021/11/23 13:47:21 by pperol            #+#    #+#             */
+/*   Updated: 2022/10/01 11:37:06 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
 	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] == s2[i])
+	if (dstsize > 0)
 	{
-		if (s1[i] == '\0' || i == n - 1)
-			return (0);
-		i++;
+		while (--dstsize && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
 	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	return (ft_strlen(src));
 }
