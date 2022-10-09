@@ -6,7 +6,7 @@
 /*   By: pperol <pperol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:22:28 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/01 17:10:04 by pperol           ###   ########.fr       */
+/*   Updated: 2022/10/09 14:53:22 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ typedef struct s_pipe
 {
 	pid_t	pid1;
 	pid_t	pid2;
+	int		tube[2];
+	int		infile;
+	int		outfile;
+	char	*paths;
+	char	**cmd_paths;
+	char	**cmd_args;
+	char	*cmd;
 }	t_pipe;	
 
 /*
