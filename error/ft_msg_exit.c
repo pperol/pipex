@@ -6,13 +6,13 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 10:14:06 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/11 10:58:10 by pperol           ###   ########.fr       */
+/*   Updated: 2022/10/12 14:32:43 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	ft_msg_exit(const char *msg)
+void	ft_msg_exit(char *msg)
 {
 	perror(msg);
 	exit (1);

@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_msg_errno_exit.c                                :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 12:51:32 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/11 12:53:38 by pperol           ###   ########.fr       */
+/*   Created: 2022/10/12 14:21:09 by pperol            #+#    #+#             */
+/*   Updated: 2022/10/12 14:27:40 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int ft_msg_errno_exit(void)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	ft_msg_errno()
-	exit (1);
+	size_t	i;
+
+	if (!dst && !src)
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dst);
 }

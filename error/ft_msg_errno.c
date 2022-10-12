@@ -6,13 +6,13 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:30:38 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/11 12:34:29 by pperol           ###   ########.fr       */
+/*   Updated: 2022/10/12 14:35:00 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	ft_msg_errno(void)
+int	ft_msg_errno(int errno)
 {
 	write(2, strerror(errno), ft_strlen(strerror(errno)));
 	write(2, "\n", 1);

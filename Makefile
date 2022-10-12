@@ -6,26 +6,31 @@
 #    By: pperol <pperol@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:23:03 by pperol            #+#    #+#              #
-#    Updated: 2022/10/01 11:56:38 by pperol           ###   ########.fr        #
+#    Updated: 2022/10/12 16:44:20 by pperol           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = 	parsing/ft_parsing_c \
-		libft/ft_strlen.c \
+NAME = pipex
+
+SRC = libft/ft_strlen.c \
 		libft/ft_strclen.c \
 		libft/ft_memset.c \
 		libft/ft_bzero.c \
 		libft/ft_calloc.c \
 		libft/ft_strlcpy.c \
 		libft/ft_split.c \
+		libft/ft_memcpy.c \
 		libft/ft_strdup.c \
 		libft/ft_strncmp.c \
 		libft/ft_strjoin.c \
+		libft/ft_putstr_fd.c \
+		error/ft_msg_err.c \
+		error/ft_msg_errno.c \
+		error/ft_msg_exit.c \
 		pipex.c
 
 CC = clang
 
-CFLAGS =  -g3 #-fsanitize=address
 CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address
 
 OBJ = $(SRC:.c=.o)

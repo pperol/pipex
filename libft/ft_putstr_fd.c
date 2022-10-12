@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strerror_exit.c                                 :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 13:13:34 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/11 13:15:38 by pperol           ###   ########.fr       */
+/*   Created: 2022/10/12 13:57:02 by pperol            #+#    #+#             */
+/*   Updated: 2022/10/12 14:28:26 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int ft_strerror_exit(void)
+void	ft_putstr_fd(char *s, int fd)
 {
-	strerror(errno);
-	exit (1);
+	if (s)
+		write(fd, s, ft_strlen(s));
 }

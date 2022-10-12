@@ -6,14 +6,14 @@
 /*   By: pperol <pperol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:22:28 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/09 14:53:22 by pperol           ###   ########.fr       */
+/*   Updated: 2022/10/12 16:39:23 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-/* write, read, close, access, pipe, dup, execve */
+/* write, read, close, access, pipe, fork, dup, execve */
 # include <unistd.h>
 # include <sys/uio.h>
 
@@ -35,6 +35,13 @@
 /* perror*/
 # include <stdio.h>
 
+
+# define ERR_INFILE "Infile"
+# define ERR_OUTFILE "Outfile"
+# define ERR_INPUT "Invalid number of arguments.\n"
+# define ERR_PIPE "Pipe"
+# define ERR_CMD "Command not found\n"
+
 /*
 ** DATAS ****************
 */
@@ -54,20 +61,44 @@ typedef struct s_pipe
 /*
 ** PARSING ****************
 */
-int			ft_parsing(char **arg);
+//int		ft_parsing(char **arg);
+int		ft_check_access(char *file_path_name);
+int		ft_check_args(int ac, char **av);
+
 
 /*
-** LIBFT ****************
+** PIPEX ******************
+*/
+char	**ft_get_path(char **env);
+char	*ft_get_cmd(char **paths, char *cmd);
+void	first_child(t_pipe pipex, char **argv, char **env);
+void	second_child(t_pipe pipex, char **av, char **env);
+char	*ft_find_path(char **env);
+void	ft_free_cmd(t_pipe *pipex);
+void	ft_pipex(char **av, char **env);
+
+
+/*
+** ERRORS *****************
+*/
+int		ft_msg_err(char *msg);
+int		ft_msg_errno(int errno);
+void	ft_msg_exit(char *msg);
+
+/*
+** LIBFT ******************
 */
 size_t  ft_strlen(const char *s);
 size_t  ft_strclen(const char *s, char c);
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(char const *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	**ft_split(char const *s, char c);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif
