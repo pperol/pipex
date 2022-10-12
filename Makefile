@@ -6,7 +6,7 @@
 #    By: pperol <pperol@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:23:03 by pperol            #+#    #+#              #
-#    Updated: 2022/10/12 16:44:20 by pperol           ###   ########.fr        #
+#    Updated: 2022/10/12 18:04:30 by pperol           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,12 @@ SRC = libft/ft_strlen.c \
 		libft/ft_strncmp.c \
 		libft/ft_strjoin.c \
 		libft/ft_putstr_fd.c \
+		parsing/ft_check_access.c \
 		error/ft_msg_err.c \
 		error/ft_msg_errno.c \
 		error/ft_msg_exit.c \
+		ft_find_path.c \
+		ft_get_cmd.c \
 		pipex.c
 
 CC = clang

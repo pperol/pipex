@@ -6,7 +6,7 @@
 /*   By: pperol <pperol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:22:28 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/12 16:39:23 by pperol           ###   ########.fr       */
+/*   Updated: 2022/10/12 17:55:31 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_pipe
 /*
 ** PARSING ****************
 */
-//int		ft_parsing(char **arg);
 int		ft_check_access(char *file_path_name);
 int		ft_check_args(int ac, char **av);
 
@@ -69,7 +68,6 @@ int		ft_check_args(int ac, char **av);
 /*
 ** PIPEX ******************
 */
-char	**ft_get_path(char **env);
 char	*ft_get_cmd(char **paths, char *cmd);
 void	first_child(t_pipe pipex, char **argv, char **env);
 void	second_child(t_pipe pipex, char **av, char **env);
