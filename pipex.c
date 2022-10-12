@@ -6,7 +6,7 @@
 /*   By: pperol <pperol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:22:10 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/12 18:03:51 by pperol           ###   ########.fr       */
+/*   Updated: 2022/10/12 18:56:15 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	first_child(t_pipe pipex, char **av, char **env)
 	dup2(pipex.infile, 0);
 	pipex.cmd_args = ft_split(av[2], ' ');
 	pipex.cmd = ft_get_cmd(pipex.cmd_paths, pipex.cmd_args[0]);
-	execve(pipex.cmd, pipex.cmd_args, env);
 	if (!pipex.cmd)
 	{
 		i = 0;
@@ -33,8 +32,8 @@ void	first_child(t_pipe pipex, char **av, char **env)
 		free(pipex.cmd_args);
 		free(pipex.cmd);
 		ft_msg_err(ERR_CMD);
-		//exit ;
 	}
+	execve(pipex.cmd, pipex.cmd_args, env);
 }
 
 void	second_child(t_pipe pipex, char **av, char **env)
@@ -46,7 +45,6 @@ void	second_child(t_pipe pipex, char **av, char **env)
 	dup2(pipex.outfile, 1);
 	pipex.cmd_args = ft_split(av[3], ' ');
 	pipex.cmd = ft_get_cmd(pipex.cmd_paths, pipex.cmd_args[0]);
-	execve(pipex.cmd, pipex.cmd_args, env);
 	if (!pipex.cmd)
 	{
 		i = 0;
@@ -58,8 +56,8 @@ void	second_child(t_pipe pipex, char **av, char **env)
 		free(pipex.cmd_args);
 		free(pipex.cmd);
 		ft_msg_err(ERR_CMD);
-		//exit ;
 	}
+	execve(pipex.cmd, pipex.cmd_args, env);
 }
 
 void	ft_free_cmd(t_pipe *pipex)
