@@ -6,7 +6,7 @@
 /*   By: pperol <pperol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:22:28 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/12 18:45:21 by pperol           ###   ########.fr       */
+/*   Updated: 2022/10/12 22:15:40 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int		ft_check_args(int ac, char **av);
 ** PIPEX ******************
 */
 char	*ft_get_cmd(char **paths, char *cmd);
-void	first_child(t_pipe pipex, char **argv, char **env);
-void	second_child(t_pipe pipex, char **av, char **env);
+void	ft_free_child(t_pipe *pipex);
+void	ft_child(int child, t_pipe pipex, char **argv, char **env);
 char	*ft_find_path(char **env);
-void	ft_free_cmd(t_pipe *pipex);
+void	ft_free_cmd_path(t_pipe *pipex);
 void	ft_pipex(char **av, char **env);
 
 /*

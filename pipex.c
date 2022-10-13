@@ -6,61 +6,51 @@
 /*   By: pperol <pperol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:22:10 by pperol            #+#    #+#             */
-/*   Updated: 2022/10/12 18:56:15 by pperol           ###   ########.fr       */
+/*   Updated: 2022/10/12 22:23:55 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	first_child(t_pipe pipex, char **av, char **env)
+void	ft_free_child(t_pipe *pipex)
 {
 	int	i;
 
-	dup2(pipex.tube[1], 1);
-	close(pipex.tube[0]);
-	dup2(pipex.infile, 0);
-	pipex.cmd_args = ft_split(av[2], ' ');
-	pipex.cmd = ft_get_cmd(pipex.cmd_paths, pipex.cmd_args[0]);
-	if (!pipex.cmd)
+	i = 0;
+	while (pipex->cmd_args[i])
 	{
-		i = 0;
-		while (pipex.cmd_args[i])
-		{
-			free(pipex.cmd_args[i]);
-			i++;
-		}
-		free(pipex.cmd_args);
-		free(pipex.cmd);
-		ft_msg_err(ERR_CMD);
+		free(pipex->cmd_args[i]);
+		i++;
 	}
-	execve(pipex.cmd, pipex.cmd_args, env);
+	free(pipex->cmd_args);
+	free(pipex->cmd);
+	ft_msg_err(ERR_CMD);
+	exit (1);
 }
 
-void	second_child(t_pipe pipex, char **av, char **env)
+void	ft_child(int child, t_pipe pipex, char **av, char **env)
 {
-	int	i;
-
-	dup2(pipex.tube[0], 0);
-	close(pipex.tube[1]);
-	dup2(pipex.outfile, 1);
-	pipex.cmd_args = ft_split(av[3], ' ');
+	if (child == 1)
+	{
+		dup2(pipex.tube[1], 1);
+		close(pipex.tube[0]);
+		dup2(pipex.infile, 0);
+		pipex.cmd_args = ft_split(av[2], ' ');
+	}
+	if (child == 2)
+	{
+		dup2(pipex.tube[0], 0);
+		close(pipex.tube[1]);
+		dup2(pipex.outfile, 1);
+		pipex.cmd_args = ft_split(av[3], ' ');
+	}	
 	pipex.cmd = ft_get_cmd(pipex.cmd_paths, pipex.cmd_args[0]);
 	if (!pipex.cmd)
-	{
-		i = 0;
-		while (pipex.cmd_args[i])
-		{
-			free(pipex.cmd_args[i]);
-			i++;
-		}
-		free(pipex.cmd_args);
-		free(pipex.cmd);
-		ft_msg_err(ERR_CMD);
-	}
+		ft_free_child(&pipex);	
 	execve(pipex.cmd, pipex.cmd_args, env);
 }
 
-void	ft_free_cmd(t_pipe *pipex)
+void	ft_free_cmd_path(t_pipe *pipex)
 {
 	int	i;
 
@@ -73,6 +63,7 @@ void	ft_free_cmd(t_pipe *pipex)
 		i++;
 	}
 	free(pipex->cmd_paths);
+	free(pipex->paths);
 }
 
 void	ft_pipex(char **av, char **env)
@@ -83,15 +74,15 @@ void	ft_pipex(char **av, char **env)
 	pipex.cmd_paths = ft_split(pipex.paths, ':');
 	pipex.pid1 = fork();
 	if (pipex.pid1 == 0)
-		first_child(pipex, av, env);
+		ft_child(1, pipex, av, env);
 	pipex.pid2 = fork();
 	if (pipex.pid2 == 0)
-		second_child(pipex, av, env);
+		ft_child(2, pipex, av, env);
 	close(pipex.tube[0]);
 	close(pipex.tube[1]);
 	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, NULL, 0);
-	ft_free_cmd(&pipex);
+	ft_free_cmd_path(&pipex);
 }
 
 
