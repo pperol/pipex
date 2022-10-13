@@ -20,4 +20,4 @@ and looks like:
 ```bash
 $> ./pipex file1 cmd1 cmd2 file2
 ```
-All errors like wrong commands,  permission to files and etc should be handled.
+All errors like wrong commands,  permission to files, etc. should be handled.
