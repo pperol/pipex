@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:46:12 by pperol            #+#    #+#             */
-/*   Updated: 2022/11/24 17:26:33 by pperol           ###   ########.fr       */
+/*   Updated: 2022/11/25 14:23:22 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,10 @@ int	main(int ac, char **av, char **env)
 	t_pipe	pipex;
 
 	if (ac != 5)
-		ft_print_error();
+	{
+		ft_putstr_fd("Error input. Usage: ./pipex file1 cmd1 cmd2 file2\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	if (!env || env[0][0] == '\0')
 		ft_print_error();
 	pipex.infile = open(av[1], O_RDONLY);
