@@ -6,7 +6,7 @@
 #    By: pperol <pperol@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:23:03 by pperol            #+#    #+#              #
-#    Updated: 2022/10/13 15:46:30 by pperol           ###   ########.fr        #
+#    Updated: 2022/11/25 15:01:21 by pperol           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC = libft/ft_strlen.c \
 		libft/ft_strncmp.c \
 		libft/ft_strjoin.c \
 		libft/ft_putstr_fd.c \
+		utils.c \
 		pipex.c
 
 CC = clang

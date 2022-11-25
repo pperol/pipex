@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:46:12 by pperol            #+#    #+#             */
-/*   Updated: 2022/11/25 14:23:22 by pperol           ###   ########.fr       */
+/*   Updated: 2022/11/25 15:04:29 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,54 +48,6 @@ Cf.:
 
 #include "pipex.h"
 
-char	*ft_find_path(char **env)
-{
-	int i;
-
-	i = 0;
-	while (ft_strncmp("PATH", env[i], 4))
-		i++;
-	return (env[i] + 5);
-}
-
-char	*ft_get_cmd(char **path, char *cmd)
-{
-	size_t	i;
-	char	*tmp;
-	char	*command;
-
-	if (access(cmd, X_OK) == 0)
-			return (cmd);
-	i = 0;
-	while (path[i])
-	{
-		tmp = ft_strjoin(path[i], "/");
-		command = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (access(command, F_OK | X_OK) == 0)
-			return (command);
-		free(command);
-		i++;
-	}
-	return (NULL);
-}
-
-void	ft_free_child(char **args, char *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (args[i])
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
-	free(cmd);
-	ft_putstr_fd("Error: command not found\n", 2);
-	exit(EXIT_FAILURE);
-}
-
 void	ft_child(size_t child, t_pipe *pipex, char **av, char **env)
 {
 	char	*cmd;
@@ -117,29 +69,14 @@ void	ft_child(size_t child, t_pipe *pipex, char **av, char **env)
 	}	
 	cmd = ft_get_cmd(pipex->path, args[0]);
 	if (!cmd)
-		ft_free_child(args, cmd);	
+		ft_free_child(args, cmd);
 	execve(cmd, args, env);
-}
-
-void	ft_free_cmd_path(t_pipe *pipex)
-{
-	int	i;
-
-	i = 0;
-	close(pipex->infile);
-	close(pipex->outfile);
-	while (pipex->path[i])
-	{
-		free(pipex->path[i]);
-		i++;
-	}
-	free(pipex->path);
 }
 
 void	ft_pipex(t_pipe *pipex, char **av, char **env)
 {
 	pid_t	pid1;
-	pid_t 	pid2;
+	pid_t	pid2;
 	char	*path;
 
 	path = ft_find_path(env);
@@ -157,13 +94,7 @@ void	ft_pipex(t_pipe *pipex, char **av, char **env)
 	ft_free_cmd_path(pipex);
 }
 
-void	ft_print_error()
-{
-	perror("Error");
-	exit(EXIT_FAILURE);
-}
-
-int	main(int ac, char **av, char **env) 
+int	main(int ac, char **av, char **env)
 {
 	t_pipe	pipex;
 
@@ -178,7 +109,7 @@ int	main(int ac, char **av, char **env)
 	pipex.outfile = open(av[4], O_TRUNC | O_CREAT | O_RDWR, 0644);
 	if (pipex.infile < 0 || pipex.outfile < 0)
 		ft_print_error();
-	if (pipe(pipex.pipefd) == -1) 
+	if (pipe(pipex.pipefd) == -1)
 		ft_print_error();
 	ft_pipex(&pipex, av, env);
 	return (0);

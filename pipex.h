@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:37:55 by pperol            #+#    #+#             */
-/*   Updated: 2022/11/24 17:28:02 by pperol           ###   ########.fr       */
+/*   Updated: 2022/11/25 15:05:04 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@
 /* perror*/
 # include <stdio.h>
 
-# define ERR_INPUT "Invalid number of arguments.\n"
-//# define ERR_ACCESS "No such file or directory\n"
-//# define ERR_CMD "Invalid command\n"
-# define ERR_CMD "Error: command not found"
-# define ERR "Error: "
-
 /*
 ** DATAS ****************
 */
@@ -55,7 +49,7 @@ typedef struct s_pipe
 /*
 ** PIPEX ******************
 */
-void	ft_print_error();
+void	ft_print_error(void);
 char	*ft_find_path(char **env);
 char	*ft_get_cmd(char **paths, char *cmd);
 void	ft_free_child(char **args, char *cmd);
