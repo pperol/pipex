@@ -6,7 +6,7 @@
 #    By: pperol <pperol@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:23:03 by pperol            #+#    #+#              #
-#    Updated: 2022/11/25 15:01:21 by pperol           ###   ########.fr        #
+#    Updated: 2022/11/25 17:12:02 by pperol           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,15 @@ SRC = libft/ft_strlen.c \
 
 CC = clang
 
+INC = pipex.h
+
 CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(INC)
 	$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
 clean:
 	rm -f $(OBJ)
