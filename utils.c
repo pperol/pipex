@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:56:13 by pperol            #+#    #+#             */
-/*   Updated: 2022/11/28 14:20:42 by pperol           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:23:55 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_free_child(char **args, char *cmd, char **tab)
 	free(args);
 	free(cmd);
 	ft_free_tab(tab);
-	ft_putstr_fd("Error: command not found\n", 2);
+	ft_putstr_fd("Error: command not found:", 2);
 	exit(EXIT_FAILURE);
 }
 

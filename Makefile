@@ -6,7 +6,7 @@
 #    By: pperol <pperol@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:23:03 by pperol            #+#    #+#              #
-#    Updated: 2022/11/28 12:46:24 by pperol           ###   ########.fr        #
+#    Updated: 2022/11/28 15:27:21 by pperol           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,12 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(INC)
+$(NAME): $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
+
+%.o: %.c $(INC)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
 clean:
 	rm -f $(OBJ)
 

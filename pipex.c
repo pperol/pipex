@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:46:12 by pperol            #+#    #+#             */
-/*   Updated: 2022/11/28 14:06:01 by pperol           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:19:20 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,13 @@ int	main(int ac, char **av, char **env)
 		exit(EXIT_FAILURE);
 	}
 	pipex.infile = open(av[1], O_RDONLY);
-	pipex.outfile = open(av[4], O_TRUNC | O_CREAT | O_RDWR, 0644);
+	pipex.outfile = open(av[4], O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	if (pipex.infile < 0 || pipex.outfile < 0)
 	{
+		perror("Error");
 		close(pipex.pipefd[0]);
 		close(pipex.pipefd[1]);
-		ft_print_error();
+		exit(EXIT_FAILURE);
 	}
 	if (pipe(pipex.pipefd) == -1)
 		ft_print_error();
