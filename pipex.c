@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:46:12 by pperol            #+#    #+#             */
-/*   Updated: 2022/12/02 12:21:33 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/02 13:32:26 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,8 @@ void	ft_pipex(t_pipe *pipex, char **av, char **env)
 	ft_free_cmd_path(pipex);
 }
 
-int	main(int ac, char **av, char **env)
+void	ft_open_fail(char **av, t_pipe pipex)
 {
-	t_pipe	pipex;
-
-	if (ac != 5)
-	{
-		ft_putstr_fd("Error input. Usage: ./pipex file1 cmd1 cmd2 file2\n", 2);
-		exit(EXIT_FAILURE);
-	}
-	if (!env || !*env || !**env)
-	{
-		ft_putstr_fd("Error env. Usage: ./pipex file1 cmd1 cmd2 file2\n", 2);
-		exit(EXIT_FAILURE);
-	}
-	pipex.infile = open(av[1], O_RDONLY);
-	pipex.outfile = open(av[4], O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	if (pipex.infile < 0)
 	{
 		ft_putstr_fd(av[1], 2);
@@ -96,8 +82,27 @@ int	main(int ac, char **av, char **env)
 		close(pipex.pipefd[1]);
 		exit(EXIT_FAILURE);
 	}
+}
+
+int	main(int ac, char **av, char **env)
+{
+	t_pipe	pipex;
+
+	if (ac != 5)
+	{
+		ft_putstr_fd("Error input. Usage: ./pipex file1 cmd1 cmd2 file2\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	if (!env || !*env || !**env)
+	{
+		ft_putstr_fd("Error env. Usage: ./pipex file1 cmd1 cmd2 file2\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	pipex.infile = open(av[1], O_RDONLY);
+	pipex.outfile = open(av[4], O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	if (pipe(pipex.pipefd) == -1)
 		ft_print_error();
+	ft_open_fail(av, pipex);
 	ft_pipex(&pipex, av, env);
 	return (0);
 }

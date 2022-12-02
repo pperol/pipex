@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:37:55 by pperol            #+#    #+#             */
-/*   Updated: 2022/11/30 14:09:38 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/02 13:35:33 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*ft_get_cmd(char **paths, char *cmd);
 void	ft_free_child(char **args, char *cmd, char **tab);
 void	ft_child(size_t child, t_pipe *pipex, char **argv, char **env);
 void	ft_free_cmd_path(t_pipe *pipex);
+void	ft_open_fail(char **av, t_pipe pipex);
 void	ft_pipex(t_pipe *pipex, char **av, char **env);
 
 /*
