@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:37:55 by pperol            #+#    #+#             */
-/*   Updated: 2022/11/28 13:43:25 by pperol           ###   ########.fr       */
+/*   Updated: 2022/11/30 14:09:38 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 /* strerror */
 # include <string.h>
+# include <errno.h>
 
 /* perror*/
 # include <stdio.h>

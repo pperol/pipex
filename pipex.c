@@ -6,45 +6,9 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:46:12 by pperol            #+#    #+#             */
-/*   Updated: 2022/11/28 16:19:20 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/02 12:21:33 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-We can divide the pipex workload on different children, while the parent waits 
-for the job to be done and supervise the children’s status.
-We will thus have to fork twice, and assign child1 to execute cmd1, and child2 
-to execute cmd2. 
-The parent will wait at the end. 
-
-# ./pipex infile cmd1 cmd2 outfile
-
-pipe()
- |
- |-- fork()
- :    |
- :    |-- child1 // cmd1
- :    :     |--dup2()
- :    :     |--close end[0]
- :    :     |--execve(cmd1)
- :    :
- |-- fork()
-      |
-      |-- child2 (cf. parent) // cmd2
-      :     |--dup2()
-      :     |--close end[1]
-      :     |--execve(cmd2)
-
-Cf.:
-	--- http://www.man-linux-magique.net/man7/pipe.html
-	--- http://www.man-linux-magique.net/man2/pipe.html
-	--- http://www.man-linux-magique.net/man2/fork.html
-	--- http://www.man-linux-magique.net/man2/dup.html
-	--- http://www.man-linux-magique.net/man3/execl.html
-	--- http://www.man-linux-magique.net/man2/execve.html
-	--- https://fr.wikipedia.org/wiki/Variable_d%27environnement	
-
-*/
 
 #include "pipex.h"
 
@@ -53,6 +17,7 @@ void	ft_child(size_t child, t_pipe *pipex, char **av, char **env)
 	char	*cmd;
 	char	**args;
 
+	args = NULL;
 	if (child == 1)
 	{
 		dup2(pipex->pipefd[1], 1);
@@ -69,7 +34,10 @@ void	ft_child(size_t child, t_pipe *pipex, char **av, char **env)
 	}	
 	cmd = ft_get_cmd(pipex->path, args[0]);
 	if (!cmd)
+	{
+		ft_putstr_fd(args[0], 2);
 		ft_free_child(args, cmd, pipex->path);
+	}
 	execve(cmd, args, env);
 }
 
@@ -81,7 +49,6 @@ void	ft_pipex(t_pipe *pipex, char **av, char **env)
 
 	path = ft_find_path(env);
 	pipex->path = ft_split(path, ':');
-	printf("%s\n", *pipex->path);
 	pid1 = fork();
 	if (pid1 == 0)
 		ft_child(1, pipex, av, env);
@@ -111,9 +78,20 @@ int	main(int ac, char **av, char **env)
 	}
 	pipex.infile = open(av[1], O_RDONLY);
 	pipex.outfile = open(av[4], O_TRUNC | O_CREAT | O_WRONLY, 0644);
-	if (pipex.infile < 0 || pipex.outfile < 0)
+	if (pipex.infile < 0)
 	{
-		perror("Error");
+		ft_putstr_fd(av[1], 2);
+		ft_putstr_fd(": ", 2);
+		perror("");
+		close(pipex.pipefd[0]);
+		close(pipex.pipefd[1]);
+		exit(EXIT_FAILURE);
+	}
+	if (pipex.outfile < 0)
+	{
+		ft_putstr_fd(av[4], 2);
+		ft_putstr_fd(": ", 2);
+		perror("");
 		close(pipex.pipefd[0]);
 		close(pipex.pipefd[1]);
 		exit(EXIT_FAILURE);
