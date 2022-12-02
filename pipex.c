@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:46:12 by pperol            #+#    #+#             */
-/*   Updated: 2022/12/02 13:32:26 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/02 14:57:58 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	ft_pipex(t_pipe *pipex, char **av, char **env)
 	char	*path;
 
 	path = ft_find_path(env);
-	pipex->path = ft_split(path, ':');
+	if (!path)
+		pipex->path = ft_split("", ' ');
+	else	
+		pipex->path = ft_split(path, ':');
 	pid1 = fork();
 	if (pid1 == 0)
 		ft_child(1, pipex, av, env);
@@ -93,11 +96,11 @@ int	main(int ac, char **av, char **env)
 		ft_putstr_fd("Error input. Usage: ./pipex file1 cmd1 cmd2 file2\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	if (!env || !*env || !**env)
-	{
-		ft_putstr_fd("Error env. Usage: ./pipex file1 cmd1 cmd2 file2\n", 2);
-		exit(EXIT_FAILURE);
-	}
+	//if (!env || !*env || !**env)
+	//{
+	//	ft_putstr_fd("Error env. Usage: ./pipex file1 cmd1 cmd2 file2\n", 2);
+	//	exit(EXIT_FAILURE);
+	//}
 	pipex.infile = open(av[1], O_RDONLY);
 	pipex.outfile = open(av[4], O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	if (pipe(pipex.pipefd) == -1)
