@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:37:55 by pperol            #+#    #+#             */
-/*   Updated: 2022/12/02 13:35:33 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/03 13:57:25 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_pipe
 /*
 ** PIPEX ******************
 */
-void	ft_print_error(void);
 char	*ft_find_path(char **env);
 char	*ft_get_cmd(char **paths, char *cmd);
 void	ft_free_child(char **args, char *cmd, char **tab);

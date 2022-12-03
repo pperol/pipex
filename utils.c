@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:56:13 by pperol            #+#    #+#             */
-/*   Updated: 2022/12/02 15:59:36 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/03 13:56:50 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,11 @@ char	*ft_get_cmd(char **path, char *cmd)
 
 void	ft_free_child(char **args, char *cmd, char **tab)
 {
-	int	i;
-
-	i = 0;
-	while (args[i])
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
+	ft_putstr_fd(args[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	ft_free_tab(args);
 	free(cmd);
 	ft_free_tab(tab);
-	ft_putstr_fd(": command not found\n", 2);
 	exit(EXIT_FAILURE);
 }
 
@@ -78,10 +71,4 @@ void	ft_free_cmd_path(t_pipe *pipex)
 		i++;
 	}
 	free(pipex->path);
-}
-
-void	ft_print_error(void)
-{
-	perror(strerror(errno));
-	exit(EXIT_FAILURE);
 }

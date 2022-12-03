@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:46:12 by pperol            #+#    #+#             */
-/*   Updated: 2022/12/02 16:16:02 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/03 13:56:22 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ void	ft_child(size_t child, t_pipe *pipex, char **av, char **env)
 	}	
 	cmd = ft_get_cmd(pipex->path, args[0]);
 	if (!cmd)
-	{
-		ft_putstr_fd(args[0], 2);
 		ft_free_child(args, cmd, pipex->path);
-	}
 	execve(cmd, args, env);
 }
 
@@ -72,8 +69,6 @@ void	ft_open_fail(char **av, t_pipe pipex)
 		ft_putstr_fd(av[1], 2);
 		ft_putstr_fd(": ", 2);
 		perror("");
-		//close(pipex.pipefd[0]);
-		//close(pipex.pipefd[1]);
 		exit(EXIT_FAILURE);
 	}
 	if (pipex.outfile < 0)
@@ -81,8 +76,6 @@ void	ft_open_fail(char **av, t_pipe pipex)
 		ft_putstr_fd(av[4], 2);
 		ft_putstr_fd(": ", 2);
 		perror("");
-		//close(pipex.pipefd[0]);
-		//close(pipex.pipefd[1]);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -100,8 +93,10 @@ int	main(int ac, char **av, char **env)
 	pipex.outfile = open(av[4], O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	ft_open_fail(av, pipex);
 	if (pipe(pipex.pipefd) == -1)
-		ft_print_error();
-	//ft_open_fail(av, pipex);
+	{
+		perror(strerror(errno));
+		exit(EXIT_FAILURE);
+	}
 	ft_pipex(&pipex, av, env);
 	return (0);
 }
