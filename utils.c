@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:56:13 by pperol            #+#    #+#             */
-/*   Updated: 2022/12/05 15:27:26 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/06 13:41:54 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_find_path(char **env)
 	i = 0;
 	if (!*env)
 		return (NULL);
-	while (env[i] && ft_strncmp("PATH", env[i], 4) != 0)
+	while (env[i] && ft_strncmp("PATH=", env[i], 5) != 0)
 		i++;
 	if (env[i] == NULL)
 		return (NULL);
